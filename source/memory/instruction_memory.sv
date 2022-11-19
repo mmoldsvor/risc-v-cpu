@@ -3,7 +3,7 @@ module instr_memory #(
     parameter memory_addr_size=6
 )(
     input logic[memory_addr_size-1:0] read_reg,
-    output logic[32:0] read_data
+    output logic[31:0] read_data
 );
     logic[31:0] memory_block [memory_size-1:0];
 
