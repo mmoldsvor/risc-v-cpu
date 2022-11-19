@@ -14,18 +14,4 @@ package cpu_package;
         U_TYPE,
         J_TYPE
     } instruction_type_t;
-
-    typedef enum {
-        LOAD        = 7'b0000011,
-        MISC_MEM    = 7'b0001111,
-        OP_IMM      = 7'b0010011,
-        AUIPC       = 7'b0010111,
-        STORE       = 7'b0100011,
-        OP          = 7'b0110011,
-        LUI         = 7'b0110111,
-        BRANCH      = 7'b1100011,
-        JALR        = 7'b1100111,
-        JAL         = 7'b1101111,
-        SYSTEM      = 7'b1110011
-    } opcode_type_t;
 endpackage

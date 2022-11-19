@@ -16,6 +16,6 @@ module cpu_control_tb;
 
     initial begin
         alu_equal <= 0;
-        instruction <= {{25{1'b0}}, 7'b0000011};
+        instruction <= 32'h0014A303;
     end
 endmodule

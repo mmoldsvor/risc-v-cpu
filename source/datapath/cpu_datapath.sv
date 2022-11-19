@@ -7,10 +7,11 @@ module datapath(
 
     input logic reg_write,
     input logic alu_select,
-    input logic result_select,
     input logic dmem_write,
-    alu_function_t alu_control,
-    instruction_type_t instruction_type,
+    input logic result_select,
+    input logic branch,
+    input alu_function_t alu_control,
+    input instruction_type_t instruction_type,
 
     output logic[5:0] imem_reg,
     input logic[31:0] imem_data,
