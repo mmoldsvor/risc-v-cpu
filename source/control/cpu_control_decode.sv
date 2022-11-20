@@ -67,6 +67,11 @@ module control_decode(
 
         if (opcode == BRANCH) begin
             instruction_type = B_TYPE;
+
+            reg_write = 0;
+            alu_select = 0;
+            dmem_write = 0;
+            branch = 1;
         end
     end
 endmodule

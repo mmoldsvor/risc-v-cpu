@@ -9,7 +9,7 @@ module datapath(
     input logic alu_select,
     input logic dmem_write,
     input logic result_select,
-    input logic branch,
+    input logic pc_select,
     input alu_function_t alu_control,
     input instruction_type_t instruction_type,
 
@@ -20,9 +20,11 @@ module datapath(
     output logic[31:0] dmem_write_data,
     input logic[31:0] dmem_read_data,
 
+    output logic alu_zero,
     output logic[31:0] instruction
 );
-    logic[31:0] pc, immediate;
+    logic[31:0] pc;
+    logic[31:0] immediate;
 
     logic[31:0] reg_data1, reg_data2;
 
@@ -33,6 +35,8 @@ module datapath(
     program_counter pc1(
         .clk(clk),
         .reset_n(reset_n),
+        .pc_select(pc_select),
+        .branch_offset(immediate),
         .pc(pc)
     );
 
@@ -55,14 +59,15 @@ module datapath(
         .instruction(instruction),
         .immediate(immediate)
     );
-    
+
     assign alu_b = alu_select ? immediate : reg_data2;
 
     alu alu1(
         .alu_control(alu_control),
         .a(reg_data1),
         .b(alu_b),
-        .result(alu_result)
+        .result(alu_result),
+        .zero(alu_zero)
     );
 
     assign dmem_reg = alu_result;

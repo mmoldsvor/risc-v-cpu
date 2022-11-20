@@ -14,18 +14,19 @@ module cpu_core(
 );
     alu_function_t alu_control;
     instruction_type_t instruction_type;
-    logic reg_write, alu_select, result_select, branch;
+    logic reg_write, alu_select, result_select, pc_select;
+    logic alu_zero;
 
     logic[31:0] instruction;
 
     control control1(
         .instruction(instruction),
-        .alu_equal(alu_equal),
+        .alu_zero(alu_zero),
         .reg_write(reg_write),
         .alu_select(alu_select),
         .dmem_write(dmem_write),
         .result_select(result_select),
-        .branch(branch),
+        .pc_select(pc_select),
         .alu_control(alu_control),
         .instruction_type(instruction_type)
     );
@@ -37,7 +38,7 @@ module cpu_core(
         .alu_select(alu_select),
         .dmem_write(dmem_write),
         .result_select(result_select),
-        .branch(branch),
+        .pc_select(pc_select),
         .alu_control(alu_control),
         .instruction_type(instruction_type),
 
@@ -48,6 +49,7 @@ module cpu_core(
         .dmem_write_data(dmem_write_data),
         .dmem_read_data(dmem_read_data),
         
+        .alu_zero(alu_zero),
         .instruction(instruction)
     );
 endmodule

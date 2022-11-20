@@ -3,13 +3,13 @@ import cpu_control_package::*;
 
 module control(
     input logic[31:0] instruction,
-    input logic alu_equal,
+    input logic alu_zero,
 
     output logic reg_write,
     output logic alu_select,
     output logic dmem_write,
     output logic result_select,
-    output logic branch,
+    output logic pc_select,
     output alu_function_t alu_control,
     output instruction_type_t instruction_type
 );
@@ -35,4 +35,6 @@ module control(
 
         .alu_control(alu_control)
     );
+
+    assign pc_select = alu_zero & branch;
 endmodule

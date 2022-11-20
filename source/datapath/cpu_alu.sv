@@ -6,7 +6,8 @@ module alu (
     input logic[31:0] a,
     input logic[31:0] b,
 
-    output logic[31:0] result
+    output logic[31:0] result,
+    output logic zero
 );
     logic[31:0] b_inverted;
     logic[31:0] b_selected;
@@ -23,6 +24,7 @@ module alu (
     assign carry_in   = alu_control == ALU_SUB ? 1 : 0;
     
     assign sum = a + b_selected + carry_in;
+    assign zero = sum == 0 ? 1 : 0;
 
     always_comb begin
         case (alu_control)
