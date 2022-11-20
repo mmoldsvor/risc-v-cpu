@@ -6,7 +6,7 @@ module instr_memory #(
     input logic[memory_addr_size-1:0] read_reg,
     output logic[31:0] read_data
 );
-    logic[31:0] memory_block [memory_size-1:0];
+    logic[7:0] memory_block [memory_size-1:0];
 
     initial begin
         // This is a temporary memory element
@@ -15,5 +15,5 @@ module instr_memory #(
         $readmemh(memory_file, memory_block);
     end
 
-    assign read_data = memory_block[read_reg];
+    assign read_data = {memory_block[read_reg], memory_block[read_reg+1], memory_block[read_reg+2], memory_block[read_reg+3]};
 endmodule

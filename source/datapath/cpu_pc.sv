@@ -9,7 +9,7 @@ module program_counter(
         if (!reset_n)
             pc_next <= 0;
         else
-            pc_next <= pc + 1;
+            pc_next <= pc + 4;
     end
 
     assign pc = pc_next;
