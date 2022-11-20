@@ -58,7 +58,12 @@ module datapath(
     
     assign alu_b = alu_select ? immediate : reg_data2;
 
-    alu alu1(.alu_control(alu_control), .a(reg_data1), .b(alu_b), .result(alu_result));
+    alu alu1(
+        .alu_control(alu_control),
+        .a(reg_data1),
+        .b(alu_b),
+        .result(alu_result)
+    );
 
     assign dmem_reg = alu_result;
     assign dmem_write_data = reg_data2;

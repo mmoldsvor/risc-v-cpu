@@ -19,7 +19,9 @@ module cpu_tb;
         .dmem_read_data(dmem_read_data)
     );
 
-    instr_memory instr_memory1(
+    instr_memory #(
+        .memory_file("imem.mem")
+    ) instr_memory1 (
         .read_reg(imem_reg),
         .read_data(imem_data)
     );

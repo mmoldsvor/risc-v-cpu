@@ -13,48 +13,26 @@ module control(
     output alu_function_t alu_control,
     output instruction_type_t instruction_type
 );
-    logic[6:0] opcode;
-    logic[2:0] funct3;
+    opcode_type_t opcode;
 
-    assign opcode = instruction[6:0];
-    assign funct3 = instruction[14:12];
+    assign opcode[6:0] = instruction[6:0];
 
-    always_comb begin
-        reg_write = 0;
-        alu_select = 0;
-        dmem_write = 0;
-        result_select = 0;
-        branch = 0;
+    control_decode control_decode1(
+        .opcode(opcode),
+        .funct3(instruction[14:12]),
+        .reg_write(reg_write),
+        .alu_select(alu_select),
+        .dmem_write(dmem_write),
+        .result_select(result_select),
+        .branch(branch),
+        .instruction_type(instruction_type)
+    );
 
-        instruction_type = R_TYPE;
+    alu_decode alu_decode1(
+        .instruction_type(instruction_type),
+        .funct3(instruction[14:12]),
+        .funct7(instruction[31:25]),
 
-        if (opcode == LOAD) begin
-            instruction_type = I_TYPE;
-            case (funct3)
-                LW: begin
-                    reg_write = 1;
-                    alu_select = 1;
-                    dmem_write = 0;
-                    result_select = 1;
-                    branch = 0;
-                end
-            endcase
-        end
-
-        if (opcode == STORE) begin
-            instruction_type = S_TYPE;
-            case (funct3)
-                SW: begin
-                    reg_write = 0;
-                    alu_select = 1;
-                    dmem_write = 1;
-                    branch = 0;
-                end
-            endcase
-        end
-
-        if (opcode == BRANCH) begin
-            instruction_type = B_TYPE;
-        end
-    end
+        .alu_control(alu_control)
+    );
 endmodule

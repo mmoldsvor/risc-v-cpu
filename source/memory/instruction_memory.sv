@@ -1,4 +1,5 @@
 module instr_memory #(
+    parameter memory_file="imem.mem",
     parameter memory_size=64,
     parameter memory_addr_size=6
 )(
@@ -11,7 +12,7 @@ module instr_memory #(
         // This is a temporary memory element
         // Which should be replaced with something that can be written to in a proper manner
 
-        $readmemh("./memory_test.mem", memory_block);
+        $readmemh(memory_file, memory_block);
     end
 
     assign read_data = memory_block[read_reg];

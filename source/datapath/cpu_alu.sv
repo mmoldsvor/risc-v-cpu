@@ -1,4 +1,4 @@
-import cpu_package::alu_function_t;
+import cpu_package::*;
 
 module alu (
     input alu_function_t alu_control,
@@ -19,16 +19,16 @@ module alu (
     assign or_result = a | b;
 
     assign b_inverted = ~b;
-    assign b_selected = alu_control == cpu_package::SUB ? b_inverted : b;
-    assign carry_in   = alu_control == cpu_package::SUB ? 1 : 0;
+    assign b_selected = alu_control == ALU_SUB ? b_inverted : b;
+    assign carry_in   = alu_control == ALU_SUB ? 1 : 0;
     
     assign sum = a + b_selected + carry_in;
 
     always_comb begin
         case (alu_control)
-            cpu_package::AND:
+            ALU_AND:
                 result = and_result;
-            cpu_package::OR:
+            ALU_OR:
                 result = or_result;
             default:
                 result = sum;

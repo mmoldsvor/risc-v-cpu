@@ -1,4 +1,4 @@
-import cpu_package::alu_function_t;
+import cpu_package::*;
 
 module cpu_alu_tb;
     alu_function_t alu_control;
@@ -14,6 +14,6 @@ module cpu_alu_tb;
     initial begin
         a <= 3;
         b <= 6;
-        alu_control <= cpu_package::ADD;
+        alu_control <= ALU_ADD;
     end
 endmodule

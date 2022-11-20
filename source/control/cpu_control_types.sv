@@ -1,5 +1,5 @@
 package cpu_control_package;
-    enum logic[6:0] {
+    typedef enum logic[6:0] {
         LOAD        = 7'b0000011,
         MISC_MEM    = 7'b0001111,
         OP_IMM      = 7'b0010011,
